@@ -1,0 +1,29 @@
+key : itu merupakan kode unik yang hanya dimiliki 1 orang, semisal id_penduduk, credit_number, dan car_vin
+non-key : merupakan sesuatu yang hampir semua orang memilikinya, semisal gender, money, car_color dan city
+
+Query
+
+* Mencari address dari tabel penduduk yang tinggal di kota Cardal
+1. SELECT address FROM penduduk WHERE city = 'Cardal';
+
+* Mencari credit number yang dimiliki salah satu penduduk menggunakan first_name dan last_name
+2. SELECT keuangan.credit_number 
+FROM keuangan INNER JOIN penduduk ON keuangan.id_penduduk = penduduk.id 
+WHERE penduduk.first_name = "Mahala" AND penduduk.last_name = "Shaddock";
+
+* Mencari credit number dan car model yang dimiliki salah satu penduduk menggunakan first_name dan last_name
+3. SELECT keuangan.credit_number, kendaraan.car_model FROM keuangan 
+INNER JOIN penduduk ON keuangan.id_penduduk = penduduk.id 
+INNER JOIN kendaraan ON kendaraan.id_penduduk = penduduk.id 
+WHERE penduduk.first_name = "Mahala" AND penduduk.last_name = "Shaddock";
+
+* Mencari nilai money salah satu penduduk dengan menggunakan id_penduduk
+4. SELECT penduduk.id_penduduk, keuangan.money FROM penduduk 
+INNER JOIN keuangan on penduduk.id = keuangan.id 
+WHERE penduduk.id_penduduk = '8717499291';
+
+* Mencari pemilik kendaraan dengan car_vin tertentu
+5. SELECT penduduk.id_penduduk, penduduk.first_name, penduduk.last_name, penduduk.address, keuangan.money 
+FROM penduduk INNER JOIN keuangan on penduduk.id = keuangan.id 
+INNER JOIN kendaraan ON penduduk.id = kendaraan.id_penduduk 
+WHERE kendaraan.car_vin = 'WBAYB6C56ED883543';
